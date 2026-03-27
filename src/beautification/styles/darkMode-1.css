@@ -1,0 +1,113 @@
+/* 暗黑模式（方案 1）— Catppuccin Mocha */
+/* 右上角 通知/私信 红点颜色 */
+html[data-theme=dark] .AppHeader-notifications:not([aria-label=通知])>div:first-of-type, html[data-theme=dark] .AppHeader-messages:not([aria-label=私信])>div:first-of-type {color: #cdd6f4 !important;border: 2px solid #1e1e2e !important;}
+/* 文字颜色 */
+html[data-theme=dark] body, html[data-theme=dark] .ContentItem-title, html[data-theme=dark] .QuestionHeader-title, html[data-theme=dark] .Tabs-link, html[data-theme=dark] .CreatorEntrance-title, html[data-theme=dark] .Search-container, html[data-theme=dark] .HotItem-excerpt, html[data-theme=dark] .PushNotifications-item, html[data-theme=dark] .Notifications-Main>header h1, html[data-theme=dark] .Notifications-Section-header h2, html[data-theme=dark] .NotificationList-Item-content, html[data-theme=dark] .Reward, html[data-theme=dark] .ChatSideBar-Search-Input input, html[data-theme=dark] input.Input, html[data-theme=dark] .LinkCard-title, html[data-theme=dark] .MCNLinkCard-title, html[data-theme=dark] .ZVideoLinkCard-title, html[data-theme=dark] .TipjarDialog-customButton, html[data-theme=dark] .Question-mainColumn .Card:not(.AnswersNavWrapper) a[data-za-detail-view-id] > div:last-child, html[data-theme=dark] .TextArea {color: #cdd6f4 !important;}
+html[data-theme=dark] .LinkCard-meta, html[data-theme=dark] .MCNLinkCard-source {color: #6c7086 !important;}
+/* 热榜标题 */
+html[data-theme=dark] .HotItem-title {color: #bac2de !important;}
+/* 首页信息流标题 */
+html[data-theme=dark] .ContentItem-title a:hover, html[data-theme=dark] .RichContent.is-collapsed .RichContent-inner:hover, html[data-theme=dark] .ContentItem-more:hover, html[data-theme=dark] .QuestionRichText--expandable.QuestionRichText--collapsed:hover {color: #bac2de !important;}
+/* 搜索高亮红字 */
+html[data-theme=dark] .Highlight em {color: #f38ba8 !important;}
+
+/* 背景颜色 - 网页 */
+html[data-theme=dark] body, html[data-theme=dark] .Select-option:focus {background: #181825 !important;}
+/* 背景颜色 - 问题 */
+html[data-theme=dark] .AppHeader, html[data-theme=dark] .QuestionHeader, html[data-theme=dark] .QuestionHeader-footer, html[data-theme=dark] .EmoticonsFooter-item--selected, html[data-theme=dark] .Card, html[data-theme=dark] .Question-mainColumn .Card .Sticky.is-bottom, html[data-theme=dark] .ContentItem-actions, html[data-theme=dark] .MoreAnswers .List-headerText, html[data-theme=dark] .CommentsV2-withPagination, html[data-theme=dark] .Topbar, html[data-theme=dark] .CommentsV2-footer, html[data-theme=dark] .CommentEditorV2-inputWrap--active, html[data-theme=dark] .InputLike, html[data-theme=dark] .InputLike + div div, html[data-theme=dark] .Popover-content, html[data-theme=dark] .Notifications-footer, html[data-theme=dark] .Messages-footer, html[data-theme=dark] .Modal-inner, html[data-theme=dark] .Emoticons, html[data-theme=dark] .EmoticonsFooter, html[data-theme=dark] .SearchTabs, html[data-theme=dark] .Popover-arrow:after, html[data-theme=dark] .CommentEditorV2-inputWrap, html[data-theme=dark] .ProfileHeader-wrapper, html[data-theme=dark] .UserCover, html[data-theme=dark] .AnswerForm-footer, html[data-theme=dark] .Editable-toolbar, html[data-theme=dark] .AnswerForm-fullscreenContent .Editable-toolbar, html[data-theme=dark] .KfeCollection-PcCollegeCard-wrapper, html[data-theme=dark] .KfeCollection-PcCollegeCard-root, html[data-theme=dark] .HotItem, html[data-theme=dark] .HotList, html[data-theme=dark] .HotListNavEditPad, html[data-theme=dark] .QuestionWaiting-typesTopper, html[data-theme=dark] .QuestionWaiting-types, html[data-theme=dark] .PostItem, html[data-theme=dark] .ClubSideBar section, html[data-theme=dark] .SearchSubTabs, html[data-theme=dark] .Club-SearchPosts-Content, html[data-theme=dark] .Club-content, html[data-theme=dark] .ClubJoinOrCheckinButton, html[data-theme=dark] .ClubEdit, html[data-theme=dark] .CornerButton, html[data-theme=dark] .Notifications-Section-header, html[data-theme=dark] .NotificationList, .NotificationList-Item.NotificationList-Item:after, .NotificationList-DateSplit.NotificationList-DateSplit:after, html[data-theme=dark] .Chat, .ChatUserListItem:after, .ChatListGroup-SectionTitle--bottomBorder:after, html[data-theme=dark] .ActionMenu, .ChatSideBar-Search--active, html[data-theme=dark] .ChatSideBar-Search-ResultListWrap, html[data-theme=dark] .QuestionMainDivider-inner, html[data-theme=dark] .Topic-bar, html[data-theme=dark] .AnnotationTag, html[data-theme=dark] .HoverCard, html[data-theme=dark] .HoverCard-loading, html[data-theme=dark] .ExploreSpecialCard, html[data-theme=dark] .ExploreHomePage-ContentSection-moreButton a, html[data-theme=dark] .ExploreRoundtableCard, html[data-theme=dark] .ExploreCollectionCard, html[data-theme=dark] .ExploreColumnCard, html[data-theme=dark] .RichText .lazy[data-lazy-status], html[data-theme=dark] #TopstoryContent > div:first-child, html[data-theme=dark] .Topstory-newUserFollowCountPanel, html[data-theme=dark] .AnswerForm-fullscreenContent .RichText, html[data-theme=dark] .Club-Search-Content, html[data-theme=dark] .WriteIndexLayout .Sticky {background: #1e1e2e !important;}
+html[data-theme=dark] .CommentListV2-header-divider, html[data-theme=dark] .CommentsV2-openComment-divider, html[data-theme=dark] .AnswerForm-fullscreenScroller, html[data-theme=dark] .HotListNav-item, html[data-theme=dark] .AutoInviteItem-wrapper--desktop, html[data-theme=dark] .ExploreSpecialCard-contentTag, html[data-theme=dark] .ExploreCollectionCard-contentTypeTag, html[data-theme=dark] .Reward-TipjarDialog-tagLine, html[data-theme=dark] .AnswerForm-footer.useNewEditorSetting > div, html[data-theme=dark] .AnswerForm-fullscreenContent > div:first-child, html[data-theme=dark] .Editable-toolbar button:hover, html[data-theme=dark] .AuthorInfo.AnswerAdd-info + div {background-color: #11111b !important;}
+html[data-theme=dark] .CornerButton:hover {background: #45475a !important;} /* 右下角按钮 */
+
+/* 背景颜色 - 引用 */
+html[data-theme=dark] .ztext blockquote {color: #7f849c !important;border-left: 3px solid #45475a !important;}
+
+/* 背景颜色 - 卡片 */
+html[data-theme=dark] .MCNLinkCard, html[data-theme=dark] .LinkCard-content, html[data-theme=dark] .ZVideoLinkCard-info {background-color: #181825 !important;}
+html[data-theme=dark] .Post-content .MCNLinkCard, html[data-theme=dark] .Post-content .LinkCard-content, html[data-theme=dark] .Post-content .ZVideoLinkCard-info {background-color: #1e1e2e !important;}
+html[data-theme=dark] .LinkCard-backdrop {background-image: url() !important;}
+
+/* 背景颜色 - 头像 */
+html[data-theme=dark] .Avatar, html[data-theme=dark] .UserAvatar {background-color: #1e1e2e !important;}
+html[data-theme=dark] .UserAvatar {border: 4px solid #1e1e2e !important;}
+
+/* 划词提示文字和背景颜色 */
+html[data-theme=dark] .css-fg13ww {color: #cdd6f4 !important; background-color: #313244 !important; border-radius: 10px !important;}
+
+/* 通知信息中点评论链接时，在弹出的评论框中 "高亮" 目标评论 */
+html[data-theme=dark] .CommentItemV2[tabindex='-1'] {background-color: #313244 !important;}
+
+/* 搜索框 */
+html[data-theme=dark] .Input-wrapper.Input-wrapper--grey, html[data-theme=dark] .ChatSideBar-Search-Input input {background: #313244 !important;}
+
+/* 加载动画 */
+html[data-theme=dark] .PlaceHolder-bg {background: -webkit-gradient(linear,left top,right top,from(#181825),color-stop(20%,#1e1e2e),color-stop(40%,#181825),to(#181825)) !important;background: linear-gradient(90deg,#181825 0,#1e1e2e 20%,#181825 40%,#181825) !important;}
+html[data-theme=dark] .PlaceHolder-inner {background: #181825 !important;color: #1e1e2e !important;}
+
+/* 私信 */
+html[data-theme=dark] .Input-wrapper {background-color: #313244 !important;}
+html[data-theme=dark] .TextMessage-sender, html[data-theme="dark"] .TextMessage-sender::after {background-color: #585b70 !important;}
+html[data-theme=dark] .TextMessage-receiver, html[data-theme="dark"] .TextMessage-receiver::after {background-color: #89b4fa !important;}
+
+html[data-theme=dark] .TextMessage-sender, html[data-theme=dark] .TextMessage-receiver {color: #cdd6f4 !important;}
+html[data-theme=dark] .ToolBar, html[data-theme=dark] .Input-wrapper, html[data-theme=dark] .ClubTopPosts, html[data-theme=dark] .ChatSideBar-Search-Input input {border: none !important;}
+
+html[data-theme=dark] .ChatBoxModal-closeIcon {fill: #9399b2 !important;}
+
+/* 私信网页 */
+html[data-theme=dark] .ChatUserListItem .Chat-ActionMenuPopover-Button {background: -webkit-gradient(linear,left top,right top,from(rgba(24,24,37,0)),color-stop(20%,#181825)) !important;background: linear-gradient(90deg,rgba(24,24,37,0),#181825 20%) !important;}
+html[data-theme=dark] .css-1j6tmrz {border: 2px solid #1e1e2e !important;}
+
+/* 选项鼠标指向时背景颜色 */
+html[data-theme=dark] .Messages-item:hover, html[data-theme=dark] .GlobalSideBar-navLink:hover, html[data-theme=dark] .Menu-item.is-active, html[data-theme=dark] .ActionMenu-item:hover, html[data-theme=dark] .ChatUserListItem--active, html[data-theme=dark] .Messages-newItem {background-color: #313244 !important;}
+/* 通知 */
+html[data-theme=dark] .PushNotifications-item a {color: #89b4fa !important;}
+
+/* 封面大图/文章头部大图 */
+html[data-theme=dark] img.UserCover-image, html[data-theme=dark] img.TitleImage {opacity: 0.7 !important;}
+/* 其他图片 */
+html[data-theme=dark] img {opacity: 0.85 !important;}
+/* GIF 动图、放大图除外 */
+html[data-theme=dark] .GifPlayer img, html[data-theme=dark] .ImageView-img, html[data-theme=dark]>body>img {opacity: 1 !important;}
+
+/* 边框 */
+html[data-theme=dark] .Topbar, html[data-theme=dark] .CommentsV2-footer, html[data-theme=dark] .Topstory-mainColumnCard .Card:not(.Topstory-tabCard), html[data-theme=dark] .NestComment:not(:last-child):after, html[data-theme=dark] .NestComment--rootComment:after, html[data-theme=dark] .NestComment .NestComment--child:after, html[data-theme=dark] .NestComment .NestComment--child:after, html[data-theme=dark] .CommentsV2-replyNum, html[data-theme=dark] .CommentItemV2:not(:first-child):after, html[data-theme=dark] .Tabs, html[data-theme=dark] .Popover-arrow:after, html[data-theme=dark] .SelfCollectionItem-innerContainer, html[data-theme=dark] .CollectionDetailPageItem-innerContainer {border-bottom: 1px solid #313244 !important;}
+html[data-theme=dark] .CommentEditorV2-inputWrap--active, html[data-theme=dark] .CommentEditorV2-inputWrap, html[data-theme=dark] .PostItem, html[data-theme=dark] .AnswerForm .Editable-toolbar, html[data-theme=dark] .Editable-toolbar span {border: none !important;}
+html[data-theme=dark] .InputLike {border: 1px solid #45475a !important;}
+html[data-theme=dark] .Popover .InputLike {border: 1px solid #1e1e2e !important;}
+html[data-theme=dark] .HotLanding-contentItem:not(:last-child) {border-bottom: 1px solid #45475a !important;}
+html[data-theme=dark] .HotLanding-content {border-left: 2px solid #45475a !important;}
+
+html[data-theme=dark] .Popover-content, html[data-theme=dark] .Popover-arrow:after {border: 1px solid #181825 !important;}
+
+/* 滚动条 */
+html[data-theme=dark] body::-webkit-scrollbar, html[data-theme="dark"] .MessagesBox::-webkit-scrollbar, html[data-theme="dark"] .Messages-list::-webkit-scrollbar, html[data-theme=dark] .PushNotifications-list::-webkit-scrollbar, html[data-theme=dark] .CommentListV2::-webkit-scrollbar, .ChatListGroup-SectionContent::-webkit-scrollbar, html[data-theme=dark] .ChatSideBar-Search-ResultListWrap::-webkit-scrollbar, html[data-theme=dark] .ChatBox textarea.Input::-webkit-scrollbar {width: 6px !important;height: 1px !important;}
+html[data-theme=dark] body::-webkit-scrollbar-thumb, html[data-theme="dark"] .MessagesBox::-webkit-scrollbar-thumb, html[data-theme="dark"] .Messages-list::-webkit-scrollbar-thumb, html[data-theme=dark] .PushNotifications-list::-webkit-scrollbar-thumb, html[data-theme=dark] .CommentListV2::-webkit-scrollbar-thumb, .ChatListGroup-SectionContent::-webkit-scrollbar-thumb, html[data-theme=dark] .ChatSideBar-Search-ResultListWrap::-webkit-scrollbar-thumb, html[data-theme=dark] .ChatBox textarea.Input::-webkit-scrollbar-thumb {background: #45475a !important;}
+html[data-theme=dark] body::-webkit-scrollbar-track {background: #181825 !important;}
+html[data-theme=dark] .MessagesBox::-webkit-scrollbar-track, html[data-theme="dark"] .Messages-list::-webkit-scrollbar-track, html[data-theme=dark] .PushNotifications-list::-webkit-scrollbar-track, html[data-theme=dark] .CommentListV2::-webkit-scrollbar-track, .ChatListGroup-SectionContent::-webkit-scrollbar-track, html[data-theme=dark] .ChatSideBar-Search-ResultListWrap::-webkit-scrollbar-track, html[data-theme=dark] .ChatBox textarea.Input::-webkit-scrollbar-track {background: #1e1e2e !important;}
+
+/* 滚动条 - 回答目录 */
+html[data-theme=dark] .AnswerItem .RichContent-hasCatalog .RichContent-inner .Catalog.isCatalogV2::-webkit-scrollbar {width: 0 !important;}
+html[data-theme=dark] .AnswerItem .RichContent-hasCatalog .RichContent-inner .Catalog.isCatalogV2 > :first-child {background: #1e1e2e !important;}
+
+html {scrollbar-width: thin; scrollbar-color: #45475a #181825;}
+.MessagesBox, .Messages-list, .PushNotifications-list, .CommentListV2, .ChatListGroup-SectionContent, .ChatSideBar-Search-ResultListWrap {scrollbar-width: thin; scrollbar-color: #45475a #1e1e2e;}
+
+/* 背景颜色 - 专栏/文章 */
+html[data-theme=dark] .WhiteBg-body, html[data-theme=dark] .Post-content, html[data-theme=dark] .Post-Row-Content .Post-Row-Content-left {background: #181825 !important;}
+html[data-theme=dark] .ColumnPageHeader, html[data-theme=dark] .BottomInfo {background: #11111b !important;}
+
+/* 按钮颜色 */
+.TopstoryTabs-link.is-active, html[data-theme=dark] .TopstoryTabs-link.is-active, html[data-theme=dark] .VoteButton, .Tag, html[data-theme=dark] .Tag, html[data-theme=dark] .HotListNav-item.is-active, html[data-theme=dark] .RichText a.UserLink-link {color: #89b4fa !important;}
+html[data-theme=dark] .Reward-rewardBtn, html[data-theme=dark] .SearchBar-searchIcon.hasValue, html[data-theme=dark] .Chat-UnreadCount, html[data-theme=dark] .Payment-CheckedButton {color: #cdd6f4 !important;}
+
+/* 关闭查看回复时的高闪 */
+html[data-theme=dark] .CommentItemV2--highlighted {-webkit-animation: nano !important;animation: nano !important;}
+
+/* 赞赏 */
+html[data-theme=dark] .Reward-TipjarDialog-amountList .Button--red, html[data-theme=dark] .Reward-TipjarDialog-amountList .Button--red, html[data-theme=dark] .Reward-TipjarDialog-amountInput .SimpleInput {color: #bac2de !important; background-color: #313244 !important; border: none !important;}
+
+/* 赞同 */
+html[data-theme=dark] .VoteButton.is-active {color: #b4befe !important;}
+
+/* 创作中心 - 分析图表 */
+html[data-theme=dark] .CreatorSection-body .AnalyticsChart text {fill: #cdd6f4 !important;}

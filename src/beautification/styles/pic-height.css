@@ -1,0 +1,2 @@
+/* 调整图片最大高度 */
+.ztext .content_image, .ztext .origin_image, .GifPlayer img {max-height: 500px !important;width: auto !important;}

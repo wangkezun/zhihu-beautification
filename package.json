@@ -1,0 +1,13 @@
+{
+  "name": "zhihu",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^4.60.0"
+  }
+}

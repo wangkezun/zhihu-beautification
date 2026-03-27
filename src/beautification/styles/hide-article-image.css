@@ -1,0 +1,2 @@
+/* 隐藏在各列表中查看文章时开头显示的大图，不影响文章、专栏页面 */
+.RichContent img.ArticleItem-image {display: none !important;}

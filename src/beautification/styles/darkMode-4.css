@@ -1,0 +1,2 @@
+/* 暗黑模式（方案 4） */
+html {filter: brightness(65%) sepia(30%) !important;}

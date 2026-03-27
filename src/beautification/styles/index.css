@@ -1,0 +1,15 @@
+/* 屏蔽首页广告 */
+.TopstoryItem--advertCard {display: none !important;}
+/* 屏蔽首页活动广告 */
+main.App-main > .Topstory > div:not(.Topstory-container) {display: none !important;}
+html[data-theme="light"] header.AppHeader {background-color: #ffffff !important; -webkit-box-shadow: 0 1px 3px rgba(18,18,18,.1) !important; box-shadow: 0 1px 3px rgba(18,18,18,.1) !important;}
+html[data-theme="light"] header.AppHeader a[aria-label="知乎"] svg {filter: invert(57%) sepia(71%) saturate(949%) hue-rotate(190deg) brightness(86%) contrast(188%) !important;}
+html[data-theme="light"] .AppHeader-TabsLink {color: #8590a6 !important; font-weight: normal !important;}
+html[data-theme="light"] .AppHeader-userInfo Button svg, .SearchBar-searchButton svg {color: inherit !important;}
+html[data-theme="light"] .AppHeader-userInfo button>div {color: #8590a6 !important;}
+html[data-theme="light"] .Input-wrapper.Input-wrapper--grey {background: #f6f6f6 !important;}
+html[data-theme="light"] .SearchBar input {color: #121212 !important;}
+html[data-theme="light"] .SearchBar input::placeholder, html[data-theme="light"] .SearchBar input::-webkit-input-placeholder, html[data-theme="light"] {color: #919baf !important;}
+html[data-theme="light"] .Button--primary.Button--blue {color: #fff !important;background-color: #06f !important;}
+/* 右上角 通知/私信 红点颜色 */
+html[data-theme=light] .AppHeader-notifications:not([aria-label=通知])>div:first-of-type, html[data-theme=light] .AppHeader-messages:not([aria-label=私信])>div:first-of-type {color: #ffffff !important;border: 2px solid #ffffff !important;}

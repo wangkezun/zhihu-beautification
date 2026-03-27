@@ -1,0 +1,8 @@
+/* 屏蔽登录提示（问题页中间的元素） */
+.Question-mainColumnLogin {display: none !important;}
+/* 屏蔽回答页/首页广告 */
+.Pc-card.Card, .Pc-Business-Card-PcTopFeedBanner {display: none !important;}
+/* 屏蔽文章页推荐文章 */
+.Recommendations-Main {display: none !important;}
+/* 解除盐选内容选中复制限制 */
+div[class*="ManuscriptIntro-root-"] {user-select: auto !important;}

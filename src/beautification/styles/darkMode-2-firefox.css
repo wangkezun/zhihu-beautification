@@ -1,0 +1,6 @@
+/* 暗黑模式（方案 2） */
+html {filter: invert(90%) !important; background-image: url(); text-shadow: 0 0 0 !important;}
+html[data-theme=light] body.ZVideo-body {background-color: #fff;}
+img, .ZVideoItem-video, .ZVideo-video, .VideoAnswerPlayer-video {filter: invert(1) !important;}
+.GifPlayer img, .GifPlayer.isPlaying video {filter: invert(1) !important;}
+.GifPlayer.isPlaying img.ztext-gif.GifPlayer-gif2mp4Image {filter: none !important;}

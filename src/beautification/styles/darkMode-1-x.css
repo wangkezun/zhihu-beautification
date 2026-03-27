@@ -1,0 +1,9 @@
+/* 问题日志页 — Catppuccin Mocha */
+html[data-theme=dark] .zu-top {background: #1e1e2e !important;border: none !important;}
+html[data-theme=dark] .zm-tag-editor-labels.zg-clear a {background: rgba(137,180,250,.1) !important;}
+html[data-theme=dark] .zu-main {background: #1e1e2e !important;padding-left: 20px;padding-right: 20px;}
+html[data-theme=dark] .zm-item+.zm-item {border-top: 1px solid #45475a;}
+html[data-theme=dark] a {color: #89b4fa !important;}
+html[data-theme=dark] ins, html[data-theme=dark] ins a {color: #a6e3a1 !important;}
+html[data-theme=dark] del a {color: #f38ba8 !important;}
+html[data-theme=dark] div#zh-hovercard a {color: #585b70 !important;}
