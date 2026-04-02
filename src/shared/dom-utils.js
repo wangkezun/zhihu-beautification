@@ -1,32 +1,3 @@
-// 寻找父元素
-export function findParentElement(item, className, type = false) {
-  if (item.parentElement) {
-    if (type) {
-      // true = 完全一致，false = 包含即可
-      if (
-        item.parentElement.className &&
-        item.parentElement.className === className
-      ) {
-        return item.parentElement;
-      } else {
-        let temp = findParentElement(item.parentElement, className, true);
-        if (temp) return temp;
-      }
-    } else {
-      if (
-        item.parentElement.className &&
-        item.parentElement.className.indexOf(className) > -1
-      ) {
-        return item.parentElement;
-      } else {
-        let temp = findParentElement(item.parentElement, className);
-        if (temp) return temp;
-      }
-    }
-  }
-  return;
-}
-
 // 获取元素是否在可视区域（完全可见）
 export function isElementInViewport(el) {
   let rect = el.getBoundingClientRect();
@@ -64,6 +35,6 @@ export function getXpath(xpath, contextNode, doc = document) {
       result.singleNodeValue
     );
   } catch (err) {
-    throw new Error(`无效 Xpath: ${xpath}`);
+    return null;
   }
 }
