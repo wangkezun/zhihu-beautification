@@ -304,15 +304,15 @@ import css_darkMode4Firefox from './styles/darkMode-4-firefox.css';
     // 隐藏文章开头大图
     if (menu_value("menu_postimg")) style += style_2;
 
-    if (document.lastChild) {
-      document.lastChild.appendChild(style_Add).textContent = style;
+    if (document.head) {
+      document.head.appendChild(style_Add).textContent = style;
     } else {
       // 避免网站加载速度太慢的备用措施
       let timer1 = setInterval(function () {
-        // 每 50 毫秒检查一下 html 是否已存在
-        if (document.lastChild) {
+        // 每 50 毫秒检查一下 head 是否已存在
+        if (document.head) {
           clearInterval(timer1); // 取消定时器
-          document.lastChild.appendChild(style_Add).textContent = style;
+          document.head.appendChild(style_Add).textContent = style;
         }
       }, 50);
     }
