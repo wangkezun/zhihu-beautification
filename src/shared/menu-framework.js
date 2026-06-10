@@ -22,6 +22,15 @@ export function menu_value(key) {
   return GM_getValue(key);
 }
 
+// 菜单注册器注入：入口脚本注册实现，功能模块通过 refreshMenu() 触发重新注册
+let menuRegistrar = null;
+export function setMenuRegistrar(fn) {
+  menuRegistrar = fn;
+}
+export function refreshMenu() {
+  if (menuRegistrar) menuRegistrar();
+}
+
 // 脚本设置弹窗
 // children: [{ key, label, tips?, inputType?: 'text' }]
 export function menu_setting(title, tips, children) {
