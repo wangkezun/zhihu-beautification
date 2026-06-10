@@ -25,11 +25,9 @@ function makeConfig(input, output, metaPath) {
     output: {
       file: output,
       format: 'es',
-      banner: userscriptBanner(metaPath),
-      // Preserve "use strict" directives — userscript engines don't use ES module mode
-      strict: false,
+      // 函数形式：watch 模式下每次重新构建都重读 meta.txt
+      banner: () => userscriptBanner(metaPath),
     },
-    treeshake: false,
     plugins: [cssStringPlugin()],
   };
 }
