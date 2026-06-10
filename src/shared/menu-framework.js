@@ -34,6 +34,12 @@ export function refreshMenu() {
 // 脚本设置弹窗
 // children: [{ key, label, tips?, inputType?: 'text' }]
 export function menu_setting(title, tips, children) {
+  // 防止重复打开叠加多个弹窗/遮罩
+  document
+    .querySelectorAll(".zhihuE_SettingBackdrop_1, .zhihuE_SettingStyle")
+    .forEach(function (el) {
+      el.remove();
+    });
   let _html = `<style class="zhihuE_SettingStyle">.zhihuE_SettingRoot {position: absolute;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%);-ms-transform: translate(-50%, -50%);-o-transform: translate(-50%, -50%);transform: translate(-50%, -50%);width: auto;min-width: 400px;max-width: 600px;height: auto;min-height: 150px;max-height: 400px;color: #535353;background-color: #fff;border-radius: 3px;}
 .zhihuE_SettingBackdrop_1 {position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 203;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;overflow-x: hidden;overflow-y: auto;-webkit-transition: opacity .3s ease-out;transition: opacity .3s ease-out;}
 .zhihuE_SettingBackdrop_2 {position: absolute;top: 0;right: 0;bottom: 0;left: 0;z-index: 0;background-color: rgba(18,18,18,.65);-webkit-transition: background-color .3s ease-out;transition: background-color .3s ease-out;}
@@ -45,6 +51,7 @@ export function menu_setting(title, tips, children) {
 .zhihuE_SettingMain input[name=zhihuE_Setting_Checkbox] {cursor: pointer;}
 .zhihuE_SettingMain label {margin-right: 20px;user-select: none;cursor: pointer;vertical-align:middle;}
 .zhihuE_SettingMain hr {border: 0.5px solid #f4f4f4;}
+.zhihuE_SettingMain p {white-space: pre-line;}
 [data-theme="dark"] .zhihuE_SettingRoot {color: #adbac7;background-color: #343A44;}
 [data-theme="dark"] .zhihuE_SettingHeader {color: #d0d0d0;background-color: #2D333B;}
 [data-theme="dark"] .zhihuE_SettingMain hr {border: 0.5px solid #2d333b;}</style>
@@ -62,29 +69,27 @@ export function menu_setting(title, tips, children) {
   }
   _html += `</div></div></div>`;
   document.body.insertAdjacentHTML("beforeend", _html);
-  setTimeout(function () {
-    const doc = document.querySelector(".zhihuE_SettingBackdrop_1");
-    if (!doc) return;
-    doc.querySelector(".zhihuE_SettingClose").onclick = function () {
-      this.parentElement.parentElement.parentElement.remove();
-      document.querySelector(".zhihuE_SettingStyle").remove();
-    };
-    doc.querySelector(".zhihuE_SettingBackdrop_2").onclick = function (event) {
-      if (event.target == this) {
-        document.querySelector(".zhihuE_SettingClose").click();
-      }
-    };
-    doc
-      .querySelectorAll("input[name=zhihuE_Setting_Checkbox]")
-      .forEach(function (checkBox) {
-        checkBox.addEventListener("click", function () {
-          GM_setValue(this.value, this.checked);
-        });
+  // insertAdjacentHTML 是同步的，插入后立即绑定事件
+  const doc = document.querySelector(".zhihuE_SettingBackdrop_1");
+  doc.querySelector(".zhihuE_SettingClose").onclick = function () {
+    this.parentElement.parentElement.parentElement.remove();
+    document.querySelector(".zhihuE_SettingStyle").remove();
+  };
+  doc.querySelector(".zhihuE_SettingBackdrop_2").onclick = function (event) {
+    if (event.target == this) {
+      document.querySelector(".zhihuE_SettingClose").click();
+    }
+  };
+  doc
+    .querySelectorAll("input[name=zhihuE_Setting_Checkbox]")
+    .forEach(function (checkBox) {
+      checkBox.addEventListener("click", function () {
+        GM_setValue(this.value, this.checked);
       });
-    doc.querySelectorAll("input[type=text]").forEach(function (textInput) {
-      textInput.onchange = function () {
-        GM_setValue(this.name, this.value);
-      };
     });
-  }, 100);
+  doc.querySelectorAll("input[type=text]").forEach(function (textInput) {
+    textInput.onchange = function () {
+      GM_setValue(this.name, this.value);
+    };
+  });
 }
