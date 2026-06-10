@@ -22,13 +22,13 @@ export function createContentFilter({ selector, className, processItem, initialS
 
   scanNow();
 
-  // URL 变化后重新扫描（scoped：页面切换时自动清理）
-  UrlChangeManager.addScoped(function () {
+  // URL 变化后重新扫描
+  UrlChangeManager.add(function () {
     setTimeout(scanNow, 1000);
   });
 
-  // 监听动态插入的新节点（scoped：页面切换时自动清理）
-  GlobalObserver.addScoped(function (mutationsList) {
+  // 监听动态插入的新节点
+  GlobalObserver.add(function (mutationsList) {
     for (const mutation of mutationsList) {
       for (const target of mutation.addedNodes) {
         if (target.nodeType != 1) continue;

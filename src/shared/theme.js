@@ -15,12 +15,12 @@ export function setTheme(theme) {
     case "light":
       document.cookie =
         "theme=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax";
-      document.lastChild.setAttribute("data-theme", "light");
+      document.documentElement.setAttribute("data-theme", "light");
       break;
     case "dark":
       document.cookie =
         "theme=dark; expires=Thu, 18 Dec 2031 12:00:00 GMT; path=/; SameSite=Lax";
-      document.lastChild.setAttribute("data-theme", "dark");
+      document.documentElement.setAttribute("data-theme", "dark");
       break;
   }
 }

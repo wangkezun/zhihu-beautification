@@ -1,8 +1,12 @@
 // 防抖
 export function debounce(fn, delay) {
   let timer;
-  return function () {
+  function debounced(...args) {
     clearTimeout(timer);
-    timer = setTimeout(fn, delay);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  }
+  debounced.cancel = function () {
+    clearTimeout(timer);
   };
+  return debounced;
 }
