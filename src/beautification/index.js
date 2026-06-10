@@ -304,18 +304,11 @@ import css_darkMode4Firefox from './styles/darkMode-4-firefox.css';
     // 隐藏文章开头大图
     if (menu_value("menu_postimg")) style += style_2;
 
-    if (document.head) {
-      document.head.appendChild(style_Add).textContent = style;
-    } else {
-      // 避免网站加载速度太慢的备用措施
-      let timer1 = setInterval(function () {
-        // 每 50 毫秒检查一下 head 是否已存在
-        if (document.head) {
-          clearInterval(timer1); // 取消定时器
-          document.head.appendChild(style_Add).textContent = style;
-        }
-      }, 50);
-    }
+    // document-start 时 head 可能尚不存在，挂到 <html> 下同样生效且零延迟
+    // （注入晚了暗黑模式会先白屏闪烁一下）
+    (document.head || document.documentElement).appendChild(
+      style_Add,
+    ).textContent = style;
   }
 
   function hideTitle() {
