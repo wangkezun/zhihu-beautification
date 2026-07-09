@@ -18,5 +18,5 @@
 // @run-at       document-start
 // @namespace    https://github.com/wangkezun/zhihu-js
 // @supportURL   https://github.com/wangkezun/zhihu-js
-// @homepageURL  https://github.com/wangkezun/zhihu-js
+// @homepageURL  https://greasyfork.org/zh-CN/scripts/586219-%E7%9F%A5%E4%B9%8E%E7%BE%8E%E5%8C%96-remake
 // ==/UserScript==
