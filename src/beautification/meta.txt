@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         知乎美化
+// @name         知乎美化 Remake
 // @version      2.0.0
 // @author       wangkezun
 // @description  宽屏显示、暗黑模式（4种）、暗黑模式跟随浏览器、屏蔽首页活动广告、隐藏文章开头大图、调整图片最大高度、向下翻时自动隐藏顶栏
