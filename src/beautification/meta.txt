@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         知乎美化
 // @version      2.0.0
-// @author       X.I.U
+// @author       wangkezun
 // @description  宽屏显示、暗黑模式（4种）、暗黑模式跟随浏览器、屏蔽首页活动广告、隐藏文章开头大图、调整图片最大高度、向下翻时自动隐藏顶栏
 // @match        https://www.zhihu.com/*
 // @match        https://zhuanlan.zhihu.com/*
@@ -17,6 +17,6 @@
 // @license      GPL-3.0 License
 // @run-at       document-start
 // @namespace    https://github.com/wangkezun/zhihu-js
-// @supportURL   https://github.com/XIU2/UserScript
-// @homepageURL  https://github.com/XIU2/UserScript
+// @supportURL   https://github.com/wangkezun/zhihu-js
+// @homepageURL  https://github.com/wangkezun/zhihu-js
 // ==/UserScript==
