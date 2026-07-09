@@ -1,6 +1,12 @@
 # zhihu-js
 
-知乎增强 & 知乎美化 UserScripts，fork 自 [XIU2/UserScript](https://github.com/XIU2/UserScript)。
+基于 [XIU2/UserScript](https://github.com/XIU2/UserScript) 改造。
+
+### 与本体的差异
+
+- 源码用 Rollup 分模块构建，本体是单文件
+- 性能优化：MutationObserver 全量扫描改为增量处理，减少页面卡顿
+- 修复 closure 泄漏
 
 ## 脚本
 
