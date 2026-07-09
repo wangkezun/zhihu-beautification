@@ -12,8 +12,8 @@
 
 | 脚本 | 说明 | 安装 |
 |------|------|------|
-| 知乎增强 Remake | 移除登录弹窗、屏蔽指定类别、屏蔽低赞回答、屏蔽用户/关键词、默认收起回答、高清原图、站外直链等 | [dist/Zhihu-Enhanced.user.js](./dist/Zhihu-Enhanced.user.js) |
-| 知乎美化 Remake | 宽屏显示、暗黑模式（4种）、屏蔽首页活动广告、隐藏文章大图、自动隐藏顶栏等 | [dist/Zhihu-Beautification.user.js](./dist/Zhihu-Beautification.user.js) |
+| 知乎增强 Remake | 移除登录弹窗、屏蔽指定类别、屏蔽低赞回答、屏蔽用户/关键词、默认收起回答、高清原图、站外直链等 | [安装](https://github.com/wangkezun/zhihu-js/releases/latest/download/Zhihu-Enhanced.user.js) |
+| 知乎美化 Remake | 宽屏显示、暗黑模式（4种）、屏蔽首页活动广告、隐藏文章大图、自动隐藏顶栏等 | [安装](https://github.com/wangkezun/zhihu-js/releases/latest/download/Zhihu-Beautification.user.js) |
 
 ## 开发
 
