@@ -12,7 +12,5 @@ Thumbs.db
 # Node
 node_modules/
 
-# Build output (user.js files tracked for GreasyFork sync)
-dist/*.js
-dist/*.js.map
-!dist/*.user.js
+# Build output
+dist/
