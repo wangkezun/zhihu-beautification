@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         知乎美化 Remake
-// @version      4.0.1
+// @version      4.0.2
 // @author       wangkezun
-// @description  宽屏显示、暗黑模式（4种）、暗黑模式跟随浏览器、屏蔽首页活动广告、隐藏文章开头大图、调整图片最大高度、向下翻时自动隐藏顶栏
+// @description  宽屏显示、Catppuccin 配色（Latte、Frappé、Macchiato、Mocha）、深色风格跟随浏览器、屏蔽首页活动广告、隐藏文章开头大图、调整图片最大高度、向下翻时自动隐藏顶栏
 // @match        https://www.zhihu.com/*
 // @match        https://zhuanlan.zhihu.com/*
 // @exclude      https://www.zhihu.com/signin*
@@ -212,18 +212,6 @@ var css_darkMode1 = "/* 暗黑模式（方案 1）— Catppuccin Mocha */\n/* �
 
 var css_darkMode1x = "/* 问题日志页 — Catppuccin Mocha */\nhtml[data-theme=dark] .zu-top {background: #1e1e2e !important;border: none !important;}\nhtml[data-theme=dark] .zm-tag-editor-labels.zg-clear a {background: rgba(137,180,250,.1) !important;}\nhtml[data-theme=dark] .zu-main {background: #1e1e2e !important;padding-left: 20px;padding-right: 20px;}\nhtml[data-theme=dark] .zm-item+.zm-item {border-top: 1px solid #45475a;}\nhtml[data-theme=dark] a {color: #89b4fa !important;}\nhtml[data-theme=dark] ins, html[data-theme=dark] ins a {color: #a6e3a1 !important;}\nhtml[data-theme=dark] del a {color: #f38ba8 !important;}\nhtml[data-theme=dark] div#zh-hovercard a {color: #585b70 !important;}\n";
 
-var css_darkMode2 = "/* 暗黑模式（方案 2） */\nhtml {filter: invert(90%) !important; text-shadow: 0 0 0 !important;}\nhtml[data-theme=light] body.ZVideo-body {background-color: #fff;}\nimg, .ZVideoItem-video, .ZVideo-video, .VideoAnswerPlayer-video {filter: invert(1) !important;}\n.css-5ym188, body>div>div>span+div>div[style='opacity: 1;'] {background-color: rgba(255, 255, 255, 0.65) !important;}\n.GifPlayer img, .GifPlayer.isPlaying video {filter: invert(1) !important;}\n.GifPlayer.isPlaying img.ztext-gif.GifPlayer-gif2mp4Image, img[alt=\"[公式]\"] {filter: none !important;}\n";
-
-var css_darkMode2Firefox = "/* 暗黑模式（方案 2） */\nhtml {filter: invert(90%) !important; background-image: url(); text-shadow: 0 0 0 !important;}\nhtml[data-theme=light] body.ZVideo-body {background-color: #fff;}\nimg, .ZVideoItem-video, .ZVideo-video, .VideoAnswerPlayer-video {filter: invert(1) !important;}\n.GifPlayer img, .GifPlayer.isPlaying video {filter: invert(1) !important;}\n.GifPlayer.isPlaying img.ztext-gif.GifPlayer-gif2mp4Image {filter: none !important;}\n";
-
-var css_darkMode3 = "/* 暗黑模式（方案 3） */\nhtml {filter: brightness(70%) !important;}\n";
-
-var css_darkMode3Firefox = "/* 暗黑模式（方案 3） */\nhtml {filter: brightness(70%) !important; background-image: url();}\n";
-
-var css_darkMode4 = "/* 暗黑模式（方案 4） */\nhtml {filter: brightness(65%) sepia(30%) !important;}\n";
-
-var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brightness(65%) sepia(30%) !important; background-image: url();}\n";
-
 (function () {
   var menu_ALL = [
       {
@@ -240,9 +228,9 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
           { key: "menu_widescreenDisplayWidth", label: "宽屏宽度", tips: "宽屏宽度 (默认 1000)", default: "1000", inputType: "text" },
         ],
       },
-      { key: "menu_darkMode", label: "暗黑模式", tips: "暗黑模式", default: true, type: "toggle" },
-      { key: "menu_darkModeType", label: "暗黑模式切换（1~4）", tips: "暗黑模式切换", default: 1, type: "cycle", max: 4 },
-      { key: "menu_darkModeAuto", label: "暗黑模式跟随浏览器", tips: "暗黑模式跟随浏览器", default: false, type: "toggle" },
+      { key: "menu_darkMode", label: "Catppuccin 配色", tips: "Catppuccin 配色", default: true, type: "toggle" },
+      { key: "menu_darkModeType", label: "Catppuccin 风格切换", tips: "切换 Mocha、Macchiato、Frappé、Latte", default: 1, type: "cycle", max: 4 },
+      { key: "menu_darkModeAuto", label: "深色风格跟随浏览器", tips: "深色风格跟随浏览器", default: false, type: "toggle" },
       { key: "menu_picHeight", label: "调整图片最大高度", tips: "调整图片最大高度", default: true, type: "toggle" },
       { key: "menu_postimg", label: "隐藏文章开头大图", tips: "隐藏文章开头大图", default: true, type: "toggle" },
       { key: "menu_hideTitle", label: "向下翻时自动隐藏顶栏", tips: "向下翻时自动隐藏顶栏", default: true, type: "toggle" },
@@ -270,7 +258,7 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
         let val = GM_getValue(item.key);
         if (val > item.max) { val = 1; GM_setValue(item.key, val); }
         menu_ID.push(GM_registerMenuCommand(
-          `${menu_num(val)} ${item.label}`,
+          `${menu_num(val)} ${catppuccinFlavourName(val)} ${item.label}`,
           function () { menu_toggle(GM_getValue(item.key), item.key); },
         ));
       } else if (item.type === "toggle") {
@@ -288,7 +276,7 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
     }));
   }
 
-  // 切换暗黑模式
+  // 切换 Catppuccin 风格
   function menu_toggle(menu_status, Name) {
     menu_status = parseInt(menu_status);
     if (menu_status >= 4) {
@@ -297,19 +285,15 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
       menu_status += 1;
     }
     GM_setValue(`${Name}`, menu_status);
-    if (menu_status === 1) {
-      // 设置 Cookie
-      if (getTheme() === "light") { setTheme("dark"); location.reload(); }
-    } else {
-      if (getTheme() === "dark") {
-        setTheme("light"); location.reload();
+    if (menu_value("menu_darkMode")) {
+      const theme = isLightFlavour(menu_status) ? "light" : "dark";
+      if (getTheme() !== theme) {
+        setTheme(theme); location.reload();
       } else {
-        if (menu_value("menu_darkMode")) {
-          location.reload();
-        } else {
-          registerMenuCommand();
-        }
+        location.reload();
       }
+    } else {
+      registerMenuCommand();
     }
   }
 
@@ -326,7 +310,6 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
       GM_setValue(`${Name}`, false);
 
       if (Name === "menu_darkMode") {
-        // 暗黑模式
         if (getTheme() === "dark") {
           setTheme("light"); location.reload();
         } else {
@@ -345,15 +328,9 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
       GM_setValue(`${Name}`, true);
 
       if (Name === "menu_darkMode") {
-        if (menu_value("menu_darkModeType") === 1) {
-          if (getTheme() === "light") { setTheme("dark"); location.reload(); }
-        } else {
-          if (getTheme() === "dark") {
-            setTheme("light"); location.reload();
-          } else {
-            location.reload();
-          }
-        }
+        const theme = isLightFlavour(menu_value("menu_darkModeType")) ? "light" : "dark";
+        if (getTheme() !== theme) setTheme(theme);
+        location.reload();
       } else {
         GM_notification({
           text: `已开启 [${Tips}] 功能\n（点击刷新网页后生效）`,
@@ -381,77 +358,33 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
       style_widescreenDisplayPost = ws.post,
       style_widescreenDisplayPeople = ws.people;
 
-    // 暗黑模式 CSS
+    // Catppuccin CSS：以 Mocha 样式为基础，按 flavour 替换色板。
     let style_darkMode_1 = css_darkMode1,
-      style_darkMode_1_x = css_darkMode1x,
-      style_darkMode_2 = css_darkMode2,
-      style_darkMode_3 = css_darkMode3,
-      style_darkMode_4 = css_darkMode4;
+      style_darkMode_1_x = css_darkMode1x;
 
     // 其他功能 CSS
     let style_2 = css_hideArticleImage,
       style_4 = css_picHeight;
 
-    // Firefox 兼容
-    const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
-    if (isFirefox) {
-      style_darkMode_2 = css_darkMode2Firefox;
-      style_darkMode_3 = css_darkMode3Firefox;
-      style_darkMode_4 = css_darkMode4Firefox;
-    }
-
     let style_Add = document.createElement("style");
 
-    // 如果开启了 [暗黑模式]
+    const selectedFlavour = menu_value("menu_darkModeType");
+    const flavour = menu_value("menu_darkModeAuto") &&
+      !window.matchMedia("(prefers-color-scheme: dark)").matches ? 4 : selectedFlavour;
+
+    // 如果开启了 Catppuccin 配色
     if (menu_value("menu_darkMode")) {
-      // 如果开启了 [暗黑模式跟随浏览器] 且 当前浏览器是暗黑模式
-      if (
-        menu_value("menu_darkModeAuto") &&
-        !window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        // 如果是暗黑模式，则需要改为白天模式
-        if (getTheme() === "dark") {
-          setTheme("light"); location.reload();
-        }
-      } else {
-        // 如果暗黑模式为 1
-        if (menu_value("menu_darkModeType") === 1) {
-          // 如果当前知乎主题为白天模式，那就是改为暗黑模式
-          if (getTheme() === "light") {
-            setTheme("dark"); location.reload();
-          }
-          // 如果是问题日志页，则改为暗黑模式
-          if (location.pathname.includes("/log")) {
-            document.documentElement.setAttribute("data-theme", "dark");
-            style_darkMode_1 += style_darkMode_1_x;
-          }
-        } else {
-          // 如果是其他暗黑模式，则需要确保为白天模式
-          if (getTheme() === "dark") {
-            setTheme("light"); location.reload();
-          }
-        }
-        switch (menu_value("menu_darkModeType")) {
-          case 1:
-            if (
-              !(
-                location.hostname.includes("zhuanlan") &&
-                (location.pathname.includes("/edit") ||
-                  location.pathname.includes("/write"))
-              )
-            )
-              style += style_darkMode_1;
-            break;
-          case 2:
-            style += style_darkMode_2;
-            break;
-          case 3:
-            style += style_darkMode_3;
-            break;
-          case 4:
-            style += style_darkMode_4;
-            break;
-        }
+      const theme = isLightFlavour(flavour) ? "light" : "dark";
+      if (getTheme() !== theme) {
+        setTheme(theme); location.reload();
+      }
+      if (location.pathname.includes("/log") && !isLightFlavour(flavour)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        style_darkMode_1 += style_darkMode_1_x;
+      }
+      if (!(location.hostname.includes("zhuanlan") &&
+        (location.pathname.includes("/edit") || location.pathname.includes("/write")))) {
+        style += getCatppuccinCSS(flavour, style_darkMode_1);
       }
     } else {
       if (getTheme() === "dark") {
@@ -467,11 +400,10 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
       style += style_index;
     if (
       menu_value("menu_darkMode") &&
-      menu_value("menu_darkModeType") === 1 &&
       (location.pathname.includes("/special/") ||
         location.pathname.includes("/pub/"))
     )
-      style += style_darkMode_2 + "video {filter: invert(1) !important;}";
+      style += getCatppuccinCSS(flavour, style_darkMode_1);
 
     // 宽屏显示
     if (menu_value("menu_widescreenDisplayIndex"))
@@ -516,6 +448,58 @@ var css_darkMode4Firefox = "/* 暗黑模式（方案 4） */\nhtml {filter: brig
     (document.head || document.documentElement).appendChild(
       style_Add,
     ).textContent = style;
+  }
+
+  function getCatppuccinCSS(flavour, css) {
+    const palettes = {
+      4: { // Latte
+        "#1e1e2e": "#eff1f5", "#181825": "#e6e9ef", "#11111b": "#dce0e8",
+        "#313244": "#ccd0da", "#45475a": "#bcc0cc", "#585b70": "#acb0be",
+        "#6c7086": "#9ca0b0", "#7f849c": "#8c8fa1", "#9399b2": "#7c7f93",
+        "#bac2de": "#5c5f77", "#cdd6f4": "#4c4f69", "#89b4fa": "#1e66f5",
+        "#b4befe": "#7287fd", "#f38ba8": "#d20f39", "#a6e3a1": "#40a02b",
+      },
+      3: { // Frappé
+        "#1e1e2e": "#303446", "#181825": "#292c3c", "#11111b": "#232634",
+        "#313244": "#414559", "#45475a": "#51576d", "#585b70": "#626880",
+        "#6c7086": "#737994", "#7f849c": "#838ba7", "#9399b2": "#949cbb",
+        "#bac2de": "#b5bfe2", "#cdd6f4": "#c6d0f5", "#89b4fa": "#8caaee",
+        "#b4befe": "#babbf1", "#f38ba8": "#e78284", "#a6e3a1": "#a6d189",
+      },
+      2: { // Macchiato
+        "#1e1e2e": "#24273a", "#181825": "#1e2030", "#11111b": "#181926",
+        "#313244": "#363a4f", "#45475a": "#494d64", "#585b70": "#5b6078",
+        "#6c7086": "#6e738d", "#7f849c": "#8087a2", "#9399b2": "#939ab7",
+        "#bac2de": "#b8c0e0", "#cdd6f4": "#cad3f5", "#89b4fa": "#8aadf4",
+        "#b4befe": "#b7bdf8", "#f38ba8": "#ed8796", "#a6e3a1": "#a6da95",
+      },
+      1: {}, // Mocha（原始 CSS）
+    };
+    const palette = palettes[flavour] || palettes[1];
+    const rgba = {
+      1: ["24,24,37", "137,180,250"],
+      2: ["36,39,58", "138,173,244"],
+      3: ["48,52,70", "140,170,238"],
+      4: ["239,241,245", "30,102,245"],
+    }[Number(flavour)] || ["24,24,37", "137,180,250"];
+    let themed = css
+      .replace(/#[0-9a-fA-F]{6}/g, (color) => palette[color.toLowerCase()] || color)
+      .replaceAll("rgba(24,24,37", `rgba(${rgba[0]}`)
+      .replaceAll("rgba(137,180,250", `rgba(${rgba[1]}`);
+    if (isLightFlavour(flavour)) {
+      themed = themed
+        .replaceAll("data-theme=dark", "data-theme=light")
+        .replaceAll('data-theme="dark"', 'data-theme="light"');
+    }
+    return themed;
+  }
+
+  function isLightFlavour(flavour) {
+    return Number(flavour) === 4;
+  }
+
+  function catppuccinFlavourName(flavour) {
+    return ["", "Mocha", "Macchiato", "Frappé", "Latte"][Number(flavour)] || "Mocha";
   }
 
   function hideTitle() {
