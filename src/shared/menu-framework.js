@@ -1,4 +1,11 @@
-import { escapeHtml } from './escape-html.js';
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 // 初始化菜单默认值到 GM 存储
 // 支持新的对象格式: { key, default, children?: [...] }
