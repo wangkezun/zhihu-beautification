@@ -34,13 +34,8 @@ function makeConfig(input, output, metaPath) {
 
 export default [
   makeConfig(
-    'src/beautification/index.js',
+    'src/index.js',
     'dist/Zhihu-Beautification.user.js',
-    'src/beautification/meta.txt',
-  ),
-  makeConfig(
-    'src/enhanced/index.js',
-    'dist/Zhihu-Enhanced.user.js',
-    'src/enhanced/meta.txt',
+    'src/meta.txt',
   ),
 ];
