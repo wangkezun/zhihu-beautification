@@ -1,5 +1,5 @@
-import { initMenuValues, menu_value, menu_setting } from '../shared/menu-framework.js';
-import { getTheme, setTheme } from '../shared/theme.js';
+import { initMenuValues, menu_value, menu_setting } from './shared/menu-framework.js';
+import { getTheme, setTheme } from './shared/theme.js';
 import { getWidescreenCSS } from './widescreen.js';
 
 // CSS imports (inlined as strings by rollup)
