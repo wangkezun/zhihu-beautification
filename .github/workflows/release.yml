@@ -43,6 +43,14 @@ jobs:
           fi
           echo "Artifact version validated: $TAG_VERSION"
 
+      - name: Validate tagged artifact
+        run: |
+          if ! cmp -s Zhihu-Beautification.user.js dist/Zhihu-Beautification.user.js; then
+            echo "ERROR: Tagged artifact does not match the CI build"
+            exit 1
+          fi
+          echo "Tagged artifact matches the CI build"
+
       - name: Ensure release does not exist
         env:
           GH_TOKEN: ${{ github.token }}
