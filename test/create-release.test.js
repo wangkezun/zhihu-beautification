@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict'
 import { execFileSync, spawnSync } from 'node:child_process'
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import {
+  chmodSync,
+  mkdtempSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import test from 'node:test'
@@ -23,6 +30,14 @@ function git(cwd, ...args) {
 function write(path, contents) {
   mkdirSync(dirname(path), { recursive: true })
   writeFileSync(path, contents)
+}
+
+function repoState(repo) {
+  return {
+    head: git(repo, 'rev-parse', 'HEAD'),
+    status: git(repo, 'status', '--porcelain'),
+    tags: git(repo, 'for-each-ref', '--format=%(refname) %(objectname)', 'refs/tags'),
+  }
 }
 
 function createFixture() {
@@ -147,6 +162,7 @@ test('脏工作区不会创建或推送 tag', () => {
   const fixture = createFixture()
   try {
     write(join(fixture.repo, 'dirty.txt'), 'dirty\n')
+    const before = repoState(fixture.repo)
     const result = spawnSync(process.execPath, [releaseScript, 'v1.0.0'], {
       cwd: fixture.repo,
       encoding: 'utf8',
@@ -154,6 +170,7 @@ test('脏工作区不会创建或推送 tag', () => {
 
     assert.notEqual(result.status, 0)
     assert.match(result.stderr, /clean worktree and index/)
+    assert.deepEqual(repoState(fixture.repo), before)
     assert.equal(
       run('git', ['ls-remote', fixture.remote, 'refs/tags/v1.0.0'], fixture.repo),
       '',
@@ -210,12 +227,63 @@ test('构建失败不会创建或推送 tag', () => {
     git(fixture.repo, 'commit', '-m', 'break build')
     git(fixture.repo, 'push', 'origin', 'main')
 
+    const before = repoState(fixture.repo)
     const result = spawnSync(process.execPath, [releaseScript, 'v1.0.0'], {
       cwd: fixture.repo,
       encoding: 'utf8',
     })
 
     assert.notEqual(result.status, 0)
+    assert.deepEqual(repoState(fixture.repo), before)
+    assert.equal(
+      run('git', ['ls-remote', fixture.remote, 'refs/tags/v1.0.0'], fixture.repo),
+      '',
+    )
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true })
+  }
+})
+
+test('push 失败保留已验证的本地 annotated tag 并提示精确重试命令', () => {
+  const fixture = createFixture()
+  try {
+    const hook = join(fixture.remote, 'hooks/pre-receive')
+    write(
+      hook,
+      '#!/bin/sh\n' +
+        "while read old new ref; do\n" +
+        '  case "$ref" in\n' +
+        '    refs/tags/*) exit 1 ;;\n' +
+        '  esac\n' +
+        'done\n' +
+        'exit 0\n',
+    )
+    chmodSync(hook, 0o755)
+    const mainBefore = git(fixture.repo, 'rev-parse', 'HEAD')
+    const statusBefore = git(fixture.repo, 'status', '--porcelain')
+
+    const result = spawnSync(process.execPath, [releaseScript, 'v1.0.0'], {
+      cwd: fixture.repo,
+      encoding: 'utf8',
+    })
+
+    assert.notEqual(result.status, 0)
+    assert.match(
+      result.stderr,
+      /Local tag v1\.0\.0 was retained; retry with: git push origin refs\/tags\/v1\.0\.0/,
+    )
+    assert.equal(git(fixture.repo, 'cat-file', '-t', 'v1.0.0'), 'tag')
+    assert.equal(git(fixture.repo, 'rev-parse', 'v1.0.0^1'), mainBefore)
+    assert.equal(
+      git(fixture.repo, 'diff', '--name-status', 'v1.0.0^1', 'v1.0.0^{}'),
+      'A\tZhihu-Beautification.user.js',
+    )
+    assert.match(
+      run('git', ['show', 'refs/tags/v1.0.0:Zhihu-Beautification.user.js'], fixture.repo),
+      /@version\s+1\.0\.0/,
+    )
+    assert.equal(git(fixture.repo, 'rev-parse', 'HEAD'), mainBefore)
+    assert.equal(git(fixture.repo, 'status', '--porcelain'), statusBefore)
     assert.equal(
       run('git', ['ls-remote', fixture.remote, 'refs/tags/v1.0.0'], fixture.repo),
       '',
