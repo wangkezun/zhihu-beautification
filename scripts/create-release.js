@@ -47,7 +47,7 @@ function isAncestor(repo, ancestor, descendant) {
 }
 
 function verifyCleanMain(repo, remote) {
-  git(repo, ['fetch', remote, `+refs/heads/main:refs/remotes/${remote}/main`, '--tags'])
+  git(repo, ['fetch', '--no-tags', remote, `+refs/heads/main:refs/remotes/${remote}/main`])
   if (git(repo, ['branch', '--show-current']) !== 'main') {
     throw new Error('Release must run from main')
   }
@@ -62,14 +62,32 @@ function verifyCleanMain(repo, remote) {
   return head
 }
 
+function listRemoteTags(repo, remote) {
+  const refs = git(repo, ['ls-remote', '--tags', '--refs', remote], { trim: false })
+  return refs
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => line.split('\t')[1])
+    .filter((ref) => ref?.startsWith('refs/tags/'))
+    .map((ref) => ref.slice('refs/tags/'.length))
+}
+
+function fetchRemoteTagCommit(repo, remote, tag) {
+  git(repo, ['fetch', '--no-tags', remote, `refs/tags/${tag}`])
+  return git(repo, ['rev-parse', 'FETCH_HEAD^{}'])
+}
+
 export function createRelease(tag, { cwd = process.cwd(), remote = 'origin' } = {}) {
   const version = versionFromTag(tag)
   const repo = git(cwd, ['rev-parse', '--show-toplevel'])
   const head = verifyCleanMain(repo, remote)
-  const tags = git(repo, ['tag', '--list']).split('\n').filter(Boolean)
-  if (tags.includes(tag)) throw new Error(`Release tag already exists: ${tag}`)
+  const localTags = git(repo, ['tag', '--list']).split('\n').filter(Boolean)
+  const remoteTags = listRemoteTags(repo, remote)
+  if (localTags.includes(tag) || remoteTags.includes(tag)) {
+    throw new Error(`Release tag already exists: ${tag}`)
+  }
 
-  const previousTag = latestReleaseTag(tags)
+  const previousTag = latestReleaseTag([...new Set([...localTags, ...remoteTags])])
   if (previousTag && compareReleaseTags(tag, previousTag) <= 0) {
     throw new Error(`Release tag ${tag} must be greater than ${previousTag}`)
   }
@@ -105,7 +123,11 @@ export function createRelease(tag, { cwd = process.cwd(), remote = 'origin' } = 
     })
     const tree = git(repo, ['write-tree'], { env: indexEnv })
 
-    const previousCommit = previousTag ? git(repo, ['rev-parse', `${previousTag}^{}`]) : null
+    const previousCommit = previousTag
+      ? remoteTags.includes(previousTag)
+        ? fetchRemoteTagCommit(repo, remote, previousTag)
+        : git(repo, ['rev-parse', `${previousTag}^{}`])
+      : null
     const previousIsAncestor = previousCommit
       ? isAncestor(repo, previousCommit, head)
       : false

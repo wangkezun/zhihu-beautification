@@ -158,6 +158,50 @@ test('后续发布把上一发布提交作为必要的第二父提交', () => {
   }
 })
 
+test('远程旧 tag 与本地同名异物时保留两端旧 ref 并发布新 tag', () => {
+  const fixture = createFixture()
+  try {
+    const mainHead = git(fixture.repo, 'rev-parse', 'HEAD')
+
+    git(fixture.repo, 'commit', '--allow-empty', '-m', 'remote release build')
+    const remoteReleaseCommit = git(fixture.repo, 'rev-parse', 'HEAD')
+    git(fixture.repo, 'tag', '--no-sign', 'v1.0.0', remoteReleaseCommit)
+    git(fixture.repo, 'push', 'origin', 'refs/tags/v1.0.0')
+    git(fixture.repo, 'tag', '-d', 'v1.0.0')
+    git(fixture.repo, 'reset', '--hard', mainHead)
+    git(fixture.repo, 'tag', '--no-sign', '-a', '-m', 'v1.0.0', 'v1.0.0', mainHead)
+
+    const localOldTagBefore = git(fixture.repo, 'rev-parse', 'refs/tags/v1.0.0')
+    const remoteOldTagBefore = run(
+      'git',
+      ['ls-remote', fixture.remote, 'refs/tags/v1.0.0'],
+      fixture.repo,
+    )
+    assert.notEqual(localOldTagBefore, remoteOldTagBefore.split(/\s/)[0])
+
+    run(process.execPath, [releaseScript, 'v1.0.1'], fixture.repo)
+
+    assert.equal(git(fixture.repo, 'rev-parse', 'refs/tags/v1.0.0'), localOldTagBefore)
+    assert.equal(
+      run('git', ['ls-remote', fixture.remote, 'refs/tags/v1.0.0'], fixture.repo),
+      remoteOldTagBefore,
+    )
+    assert.equal(git(fixture.repo, 'cat-file', '-t', 'v1.0.1'), 'tag')
+    assert.equal(
+      git(fixture.repo, 'show', '-s', '--format=%P', 'v1.0.1^{}').split(' ')[1],
+      remoteReleaseCommit,
+    )
+    assert.notEqual(
+      run('git', ['ls-remote', fixture.remote, 'refs/tags/v1.0.1'], fixture.repo),
+      '',
+    )
+    assert.equal(git(fixture.repo, 'rev-parse', 'HEAD'), mainHead)
+    assert.equal(git(fixture.repo, 'status', '--porcelain'), '')
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true })
+  }
+})
+
 test('脏工作区不会创建或推送 tag', () => {
   const fixture = createFixture()
   try {
@@ -189,6 +233,7 @@ test('已有 tag 不会被覆盖且版本必须递增', () => {
       ['ls-remote', fixture.remote, 'refs/tags/v2.0.0'],
       fixture.repo,
     )
+    git(fixture.repo, 'tag', '-d', 'v2.0.0')
 
     const duplicate = spawnSync(process.execPath, [releaseScript, 'v2.0.0'], {
       cwd: fixture.repo,
