@@ -161,7 +161,7 @@ function getWidescreenCSS(width) {
 .Question-mainColumn, .ListShortcut, .QuestionWaiting-mainColumn {width: inherit !important;}
 .Question-mainColumn+div,[data-za-detail-view-path-module="RightSideBar"], .Question-sideColumn, .GlobalSideBar {display: none !important;}
 .QuestionWaiting-mainColumn {margin-right: 0 !important;}
-.Question-main {width: ${w}px;}
+.Question-main {width: ${w}px !important;}
 @media only screen and (max-width: ${w50}px) {.Question-main {width: auto !important;}}
 @media only screen and (max-width: ${w100}px) {.Question-main {width: 98.5% !important;}}
 .AuthorInfo {max-width: 100% !important;}
