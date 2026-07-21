@@ -1,5 +1,5 @@
 import { initMenuValues, menu_value, menu_setting } from './shared/menu-framework.js';
-import { getTheme, setTheme } from './shared/theme.js';
+import { getTheme, keepTheme, setTheme } from './shared/theme.js';
 import { getWidescreenCSS } from './widescreen.js';
 
 // CSS imports (inlined as strings by rollup)
@@ -177,6 +177,7 @@ import css_darkMode1x from './styles/darkMode-1-x.css';
       if (getTheme() !== theme) {
         setTheme(theme); location.reload();
       }
+      keepTheme(theme);
       if (location.pathname.includes("/log") && !isLightFlavour(flavour)) {
         document.documentElement.setAttribute("data-theme", "dark");
         style_darkMode_1 += style_darkMode_1_x;
