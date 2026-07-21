@@ -1,9 +1,21 @@
 /* 暗黑模式（方案 1）— Catppuccin Mocha */
 /* 右上角 通知/私信 红点颜色 */
 html[data-theme=dark] .AppHeader-notifications:not([aria-label=通知])>div:first-of-type, html[data-theme=dark] .AppHeader-messages:not([aria-label=私信])>div:first-of-type {color: #cdd6f4 !important;border: 2px solid #1e1e2e !important;}
+
+/* 新版顶栏导航及消息区 */
+html[data-theme=dark] header.AppHeader nav a, html[data-theme=dark] header.AppHeader nav a *, html[data-theme=dark] header.AppHeader button[aria-label="通知"] > div:last-child, html[data-theme=dark] header.AppHeader button[aria-label="通知"] > div:last-child *, html[data-theme=dark] header.AppHeader button[aria-label$="条私信"] > div:last-child, html[data-theme=dark] header.AppHeader button[aria-label$="条私信"] > div:last-child *, html[data-theme=dark] header.AppHeader a[href*="/creator"] > div, html[data-theme=dark] header.AppHeader a[href*="/creator"] > div * {color: #bac2de !important;}
 /* 文字颜色 */
 html[data-theme=dark] body, html[data-theme=dark] .ContentItem-title, html[data-theme=dark] .QuestionHeader-title, html[data-theme=dark] .Tabs-link, html[data-theme=dark] .CreatorEntrance-title, html[data-theme=dark] .Search-container, html[data-theme=dark] .HotItem-excerpt, html[data-theme=dark] .PushNotifications-item, html[data-theme=dark] .Notifications-Main>header h1, html[data-theme=dark] .Notifications-Section-header h2, html[data-theme=dark] .NotificationList-Item-content, html[data-theme=dark] .Reward, html[data-theme=dark] .ChatSideBar-Search-Input input, html[data-theme=dark] input.Input, html[data-theme=dark] .LinkCard-title, html[data-theme=dark] .MCNLinkCard-title, html[data-theme=dark] .ZVideoLinkCard-title, html[data-theme=dark] .TipjarDialog-customButton, html[data-theme=dark] .Question-mainColumn .Card:not(.AnswersNavWrapper) a[data-za-detail-view-id] > div:last-child, html[data-theme=dark] .TextArea {color: #cdd6f4 !important;}
 html[data-theme=dark] .LinkCard-meta, html[data-theme=dark] .MCNLinkCard-source {color: #6c7086 !important;}
+
+/* 问题描述中的话题推荐卡片 */
+html[data-theme=dark] .QuestionHeader-main > a[aria-label^="话题 "] {background: #313244 !important;color: #cdd6f4 !important;}
+html[data-theme=dark] .QuestionHeader-main > a[aria-label^="话题 "] div {color: #cdd6f4 !important;}
+html[data-theme=dark] .QuestionHeader-main > a[aria-label^="话题 "] button {background: #45475a !important;color: #bac2de !important;}
+
+/* 新版回答评论弹窗 */
+html[data-theme=dark] .Modal-content .CommentContent {color: #cdd6f4 !important;}
+html[data-theme=dark] .Modal-content:has(.CommentContent) a[href*="/people/"] {color: #89b4fa !important;}
 /* 热榜标题 */
 html[data-theme=dark] .HotItem-title {color: #bac2de !important;}
 /* 首页信息流标题 */
