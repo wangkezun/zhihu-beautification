@@ -16,19 +16,21 @@ html[data-theme=dark] .QuestionHeader-main > a[aria-label^="话题 "] button {ba
 /* 新版回答评论（兼容弹框和内嵌结构） */
 html[data-theme=dark] .Modal-content .CommentContent, html[data-theme=dark] .Comments-container .CommentContent {color: #cdd6f4 !important;}
 html[data-theme=dark] .Modal-content:has(.CommentContent) a[href*="/people/"], html[data-theme=dark] .Comments-container a[href*="/people/"] {color: #89b4fa !important;}
+html[data-theme=dark] div:has(> .HoverCard-item) {background: #1e1e2e !important;color: #cdd6f4 !important;border-color: #45475a !important;}
 
 /* 将新版内嵌评论恢复为居中弹框；原生 Modal 结构不受影响 */
-html[data-theme=dark]:has(.AnswerItem .Comments-container) {overflow: hidden !important;}
-html[data-theme=dark] .AnswerItem .Comments-container {position: fixed !important;top: 16px !important;bottom: 16px !important;left: 50% !important;z-index: 2147483646 !important;width: min(1200px, calc(100vw - 96px)) !important;max-height: none !important;overflow: hidden !important;transform: translateX(-50%) !important;border-radius: 6px !important;background: #1e1e2e !important;box-shadow: 0 0 0 100vmax rgba(0,0,0,.72), 0 12px 36px rgba(0,0,0,.45) !important;}
-html[data-theme=dark] .AnswerItem .Comments-container > div:first-child {display: flex !important;height: 100% !important;min-height: 0 !important;flex-direction: column !important;}
-html[data-theme=dark] .AnswerItem .Comments-container > div:first-child > div:first-child {order: 2;flex: none;background: #1e1e2e !important;}
-html[data-theme=dark] .AnswerItem .Comments-container > div:first-child > div:nth-child(2) {display: flex !important;min-height: 0 !important;flex: 1;flex-direction: column !important;order: 1;}
-html[data-theme=dark] .AnswerItem .Comments-container > div:first-child > div:nth-child(2) > div:nth-child(2) {min-height: 0 !important;overflow-y: auto !important;}
-html[data-theme=dark] .AnswerItem .Comments-container > div:first-child > div:nth-child(2) > div:first-child > div:nth-child(2) {background: #313244 !important;}
-html[data-theme=dark] .AnswerItem .Comments-container > div:first-child > div:nth-child(2) > div:first-child > div:nth-child(2) > div:first-child {background: #45475a !important;color: #cdd6f4 !important;}
-html[data-theme=dark] .AnswerItem:has(.Comments-container) .ContentItem-actions button:has(svg[class*="ChatBubble"]) {position: fixed !important;top: 24px !important;right: max(20px, calc((100vw - 1200px) / 2 - 52px)) !important;z-index: 2147483647 !important;width: 48px !important;height: 48px !important;padding: 0 !important;border: 0 !important;background: transparent !important;color: transparent !important;font-size: 0 !important;}
-html[data-theme=dark] .AnswerItem:has(.Comments-container) .ContentItem-actions button:has(svg[class*="ChatBubble"]) svg {display: none !important;}
-html[data-theme=dark] .AnswerItem:has(.Comments-container) .ContentItem-actions button:has(svg[class*="ChatBubble"])::after {content: "×";color: #cdd6f4;font-size: 48px;font-weight: 200;line-height: 1;}
+html[data-theme=dark]:has(.ContentItem .Comments-container) {overflow: hidden !important;}
+html[data-theme=dark] .ContentItem .Comments-container {position: fixed !important;top: 16px !important;bottom: 16px !important;left: 50% !important;z-index: 2147483646 !important;width: min(1200px, calc(100vw - 96px)) !important;max-height: none !important;overflow: hidden !important;transform: translateX(-50%) !important;border-radius: 6px !important;background: #1e1e2e !important;box-shadow: 0 0 0 100vmax rgba(0,0,0,.72), 0 12px 36px rgba(0,0,0,.45) !important;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child {display: flex !important;height: 100% !important;min-height: 0 !important;flex-direction: column !important;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child > div:first-child {order: 2;flex: none;background: #1e1e2e !important;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child > div:has(.InputLike):not(:first-child) {display: none !important;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child > div:nth-child(2) {display: flex !important;min-height: 0 !important;flex: 1;flex-direction: column !important;order: 1;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child > div:nth-child(2) > div:nth-child(2) {min-height: 0 !important;overflow-y: auto !important;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child > div:nth-child(2) > div:first-child > div:nth-child(2) {background: #313244 !important;}
+html[data-theme=dark] .ContentItem .Comments-container > div:first-child > div:nth-child(2) > div:first-child > div:nth-child(2) > div:first-child {background: #45475a !important;color: #cdd6f4 !important;}
+html[data-theme=dark] .ContentItem:has(.Comments-container) .ContentItem-actions button:has(svg[class*="ChatBubble"]) {position: fixed !important;top: 24px !important;right: max(20px, calc((100vw - 1200px) / 2 - 52px)) !important;z-index: 2147483647 !important;width: 48px !important;height: 48px !important;padding: 0 !important;border: 0 !important;background: transparent !important;color: transparent !important;font-size: 0 !important;}
+html[data-theme=dark] .ContentItem:has(.Comments-container) .ContentItem-actions button:has(svg[class*="ChatBubble"]) svg {display: none !important;}
+html[data-theme=dark] .ContentItem:has(.Comments-container) .ContentItem-actions button:has(svg[class*="ChatBubble"])::after {content: "×";color: #cdd6f4;font-size: 48px;font-weight: 200;line-height: 1;}
 /* 热榜标题 */
 html[data-theme=dark] .HotItem-title {color: #bac2de !important;}
 /* 首页信息流标题 */

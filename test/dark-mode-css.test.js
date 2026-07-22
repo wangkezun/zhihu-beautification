@@ -30,8 +30,13 @@ test('深色主题下代码使用深色背景', () => {
 })
 
 test('新版内嵌评论恢复为可关闭的居中弹框', () => {
-  assert.match(css, /\.AnswerItem \.Comments-container \{position: fixed !important/)
+  assert.match(css, /\.ContentItem \.Comments-container \{position: fixed !important/)
   assert.match(css, /box-shadow: 0 0 0 100vmax/)
   assert.match(css, /button:has\(svg\[class\*="ChatBubble"\]\)/)
   assert.match(css, /content: "×"/)
+})
+
+test('文章评论输入栏和用户悬浮卡片使用深色背景', () => {
+  assert.match(css, /div:has\(> \.HoverCard-item\)/)
+  assert.match(css, /div:has\(\.InputLike\):not\(:first-child\)/)
 })
