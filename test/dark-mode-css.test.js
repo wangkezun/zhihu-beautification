@@ -40,3 +40,8 @@ test('文章评论输入栏和用户悬浮卡片使用深色背景', () => {
   assert.match(css, /div:has\(> \.HoverCard-item\)/)
   assert.match(css, /div:has\(\.InputLike\):not\(:first-child\)/)
 })
+
+test('评论弹框使用深色边框和可读标题颜色', () => {
+  assert.match(css, /\.Comments-container \* \{border-color: #45475a !important/)
+  assert.match(css, /> div:first-child \* \{color: #cdd6f4 !important/)
+})
