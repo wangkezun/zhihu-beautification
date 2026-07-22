@@ -17,6 +17,7 @@ html[data-theme=dark] .QuestionHeader-main > a[aria-label^="话题 "] button {ba
 html[data-theme=dark] .Modal-content .CommentContent, html[data-theme=dark] .Comments-container .CommentContent {color: #cdd6f4 !important;}
 html[data-theme=dark] .Modal-content:has(.CommentContent) a[href*="/people/"], html[data-theme=dark] .Comments-container a[href*="/people/"] {color: #89b4fa !important;}
 html[data-theme=dark] div:has(> .HoverCard-item) {background: #1e1e2e !important;color: #cdd6f4 !important;border-color: #45475a !important;}
+html[data-theme=dark] div:has(> div > div > .HoverCard-item) {z-index: 2147483647 !important;}
 
 /* 将新版内嵌评论恢复为居中弹框；原生 Modal 结构不受影响 */
 html[data-theme=dark]:has(.ContentItem .Comments-container) {overflow: hidden !important;}
@@ -37,6 +38,12 @@ html[data-theme=dark] .ContentItem:has(.Comments-container) .ContentItem-actions
 html[data-theme=dark] .HotItem-title {color: #bac2de !important;}
 /* 首页信息流标题 */
 html[data-theme=dark] .ContentItem-title a:hover, html[data-theme=dark] .RichContent.is-collapsed .RichContent-inner:hover, html[data-theme=dark] .ContentItem-more:hover, html[data-theme=dark] .QuestionRichText--expandable.QuestionRichText--collapsed:hover {color: #bac2de !important;}
+/* 问题描述与回答正文中的普通超链接 */
+html[data-theme=dark] .QuestionRichText a, html[data-theme=dark] .RichContent-inner a {color: #89b4fa !important;}
+/* 首页发布想法输入区 */
+html[data-theme=dark] .WriteArea section > div:first-child > div:first-child, html[data-theme=dark] .WriteArea section button svg[class*="ZDI--"] {color: #9399b2 !important;}
+/* 首页刷新时的加载骨架，避免短暂白屏 */
+html[data-theme=dark] .skeleton, html[data-theme=dark] .skeleton::before, html[data-theme=dark] .skeleton::after {background: #1e1e2e !important;}
 /* 搜索高亮红字 */
 html[data-theme=dark] .Highlight em {color: #f38ba8 !important;}
 

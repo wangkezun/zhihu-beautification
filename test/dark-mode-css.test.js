@@ -38,10 +38,26 @@ test('新版内嵌评论恢复为可关闭的居中弹框', () => {
 
 test('文章评论输入栏和用户悬浮卡片使用深色背景', () => {
   assert.match(css, /div:has\(> \.HoverCard-item\)/)
+  assert.match(css, /div:has\(> div > div > \.HoverCard-item\) \{z-index: 2147483647 !important/)
   assert.match(css, /div:has\(\.InputLike\):not\(:first-child\)/)
 })
 
 test('评论弹框使用深色边框和可读标题颜色', () => {
   assert.match(css, /\.Comments-container \* \{border-color: #45475a !important/)
   assert.match(css, /> div:first-child \* \{color: #cdd6f4 !important/)
+})
+
+test('首页发布框占位文字和工具图标使用可读颜色', () => {
+  assert.match(css, /\.WriteArea section > div:first-child > div:first-child/)
+  assert.match(css, /\.WriteArea section button svg\[class\*="ZDI--"\]/)
+})
+
+test('问题和回答正文中的普通超链接使用主题蓝色', () => {
+  assert.match(css, /\.QuestionRichText a/)
+  assert.match(css, /\.RichContent-inner a \{color: #89b4fa !important/)
+})
+
+test('首页加载骨架不会闪现白色背景', () => {
+  assert.match(css, /\.skeleton, html\[data-theme=dark\] \.skeleton::before/)
+  assert.match(css, /\.skeleton::after \{background: #1e1e2e !important/)
 })
